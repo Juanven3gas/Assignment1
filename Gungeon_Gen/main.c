@@ -16,6 +16,17 @@ void add_rooms(void)
 
     for(i = 0; i < num_rooms; i++)
     {
+        int x_dim = (rand() % 6) + 3;
+        int y_dim = (rand() % 6) + 2;
+
+        //Check the perimeter
+        for()
+        {
+            for()
+            {
+
+            }
+        }
 
     }
 }
