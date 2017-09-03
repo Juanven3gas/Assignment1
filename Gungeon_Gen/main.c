@@ -20,9 +20,9 @@ void add_rooms(void)
         int y_dim = (rand() % 6) + 2;
 
         //Check the perimeter
-        for()
+        for(j = 0; j < x_dim; j++)
         {
-            for()
+            for(k = 0; k < y_dim; k++)
             {
 
             }
