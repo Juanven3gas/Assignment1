@@ -9,7 +9,7 @@
 char dungeon[dungeon_rows][dungeon_columns];
 int rooms[5][4];
 
-int check_rooms(void);
+int check_rooms(int rows, int columns, int start_row, int start_column);
 void init_rooms(void);
 void add_rooms(void);
 void add_corridors(void);
@@ -19,8 +19,7 @@ void print_dungeon(void);
 int main()
 {
     init_dungeon();
-    init_rooms();
-    //add_rooms();
+    add_rooms();
     print_dungeon();
 
     return 0;
@@ -40,6 +39,20 @@ void add_rooms(void)
     while(room_counter < 5)
     {
         int success = 1;
+
+        //random row from 3 - 9
+        rows = (rand() % 7) + 3;
+
+        //random col from 3 - 9
+        columns = (rand() % 7) + 3;
+
+        //random row from 1 - 12
+        start_row = (rand() % 11) + 1;
+
+        //random col from 1 - 71
+        start_column = (rand() % 70) + 1;
+
+        success = check_rooms(rows, columns, start_row, start_column);
 
         /*
          * Add room to the dungeon & then increment the room counter
@@ -94,7 +107,7 @@ void init_rooms(void)
     }
 }
 
-int check_rooms(void)
+int check_rooms(int rows, int columns, int start_row, int start_column)
 {
     int i = 0;
     int j = 0;
@@ -114,7 +127,7 @@ int check_rooms(void)
 
     //checks to see if there is nothing below room
 
-    for(i = (start_row + 3); i < (start_row + 6); i++)
+    for(i = (start_row + rows); i < (start_row + rows + 3); i++)
     {
         for(j = start_column; j < (start_column + columns); j ++)
         {
@@ -129,7 +142,7 @@ int check_rooms(void)
     //checks to see if there is nothing to the right
     for(i = start_row; i < (start_row + rows); i++)
     {
-        for(j = (start_column + 3); j < (start_column + 6); j++)
+        for(j = (start_column + columns); j < (start_column + columns + 3); j++)
         {
             if(dungeon[i][j] == '.')
             {
@@ -141,7 +154,7 @@ int check_rooms(void)
     //checks to see if there is nothing to the left
     for(i = start_row; i < (start_row + rows); i++)
     {
-        for(j = (start_column - 3); j < start_column; j++)
+        for(j = (start_column - columns); j < start_column; j++)
         {
             if(dungeon[i][j] == '.')
             {
