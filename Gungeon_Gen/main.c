@@ -10,7 +10,7 @@ char dungeon[dungeon_rows][dungeon_columns];
 int rooms[5][4];
 
 int check_rooms(int rows, int columns, int start_row, int start_column);
-void init_rooms(void);
+void sort_rooms(void);
 void add_rooms(void);
 void add_corridors(void);
 void init_dungeon(void);
@@ -20,9 +20,107 @@ int main()
 {
     init_dungeon();
     add_rooms();
+    add_corridors();
     print_dungeon();
 
     return 0;
+}
+
+void sort_rooms(void)
+{
+    int i, j;
+
+    for(i = 0; i < 4; i++)
+    {
+        int min_indx = i;
+
+        for(j = i+1; j < 5; j++)
+        {
+            int room1_start_y = rooms[min_indx][3];
+            int room2_start_y = rooms[j][3];
+
+            if(room2_start_y < room1_start_y)
+            {
+                min_indx = j;
+            }
+
+        }
+
+        int temp_rows = rooms[min_indx][0];
+        int temp_cols = rooms[min_indx][1];
+        int temp_start_row = rooms[min_indx][2];
+        int temp_start_cols = rooms[min_indx][3];
+
+        rooms[min_indx][0] = rooms[i][0];
+        rooms[min_indx][1] = rooms[i][1];
+        rooms[min_indx][2] = rooms[i][2];
+        rooms[min_indx][3] = rooms[i][3];
+
+        rooms[i][0] = temp_rows;
+        rooms[i][1] = temp_cols;
+        rooms[i][2] = temp_start_row;
+        rooms[i][3] = temp_start_cols;
+    }
+}
+
+void add_corridors(void)
+{
+    int i, j, room;
+
+    for(room = 0; room < 4; room++)
+    {
+        int room1_rows = rooms[room][0];
+        int room1_columns = rooms[room][1];
+        int room1_start_row = rooms[room][2];
+        int room1_start_column = rooms[room][3];
+
+        int room2_rows = rooms[room+1][0];
+        int room2_columns = rooms[room+1][1];
+        int room2_start_row = rooms[room+1][2];
+        int room2_start_column = rooms[room+1][3];
+
+        int room1_mid_x = (room1_rows/2) + room1_start_row;
+        int room1_mid_y = (room1_columns/2) + room1_start_column;
+
+        //printf("room 1 mid x: %d, room 1 mid y: %d\n", room1_mid_x, room1_mid_y);
+
+        int room2_mid_x = (room2_rows/2) + room2_start_row;
+        int room2_mid_y = (room2_columns/2) + room2_start_column;
+
+        //printf("room 2 mid x: %d, room 2 mid y: %d\n", room2_mid_x, room2_mid_y);
+
+        if((room2_mid_x - room1_mid_x) < 0)
+        {
+            for(i =  room1_mid_x; i > room2_mid_x - 1; i --)
+            {
+                dungeon[i][room1_start_column + room1_columns] = '#';
+            }
+        }
+        else
+        {
+            for(i = room1_mid_x; i < room2_mid_x + 1; i++)
+            {
+                dungeon[i][room1_start_column + room1_columns] = '#';
+            }
+        }
+
+        if((room2_mid_y - room1_mid_y) < 0)
+        {
+            for(j = (room1_start_column + room1_columns); j > (room2_start_column) ; j--)
+            {
+                dungeon[room2_mid_x][j] = '#';
+            }
+        }
+        else
+        {
+            for(j = (room1_start_column + room1_columns); j < room2_start_column; j++)
+            {
+                dungeon[room2_mid_x][j] = '#';
+            }
+        }
+
+    }
+
 }
 
 void add_rooms(void)
@@ -43,6 +141,7 @@ void add_rooms(void)
         //random row from 3 - 9
         rows = (rand() % 7) + 3;
 
+
         //random col from 3 - 9
         columns = (rand() % 7) + 3;
 
@@ -59,8 +158,6 @@ void add_rooms(void)
          */
         if(success)
         {
-            printf("room rows: %d, room columns: %d, start_row: %d, start_column: %d\n", rows, columns, start_row, start_column);
-
             for(i = start_row; i < (start_row + rows); i++)
             {
                 for(j = start_column; j < (start_column + columns); j++)
@@ -78,32 +175,12 @@ void add_rooms(void)
         }
 
     }
-}
 
-void init_rooms(void)
-{
-    int i, start_row, start_column, rows, columns;
-
-    srand(time(NULL));
+    sort_rooms();
 
     for(i = 0; i < 5; i++)
     {
-        //random row from 3 - 9
-        rows = (rand() % 7) + 3;
-
-        //random col from 3 - 9
-        columns = (rand() % 7) + 3;
-
-        //random row from 1 - 12
-        start_row = (rand() % 11) + 1;
-
-        //random col from 1 - 72
-        start_column = (rand() % 71) + 1;
-
-        rooms[i][0] = start_row;
-        rooms[i][1] = start_column;
-        rooms[i][2] = rows;
-        rooms[i][3] = columns;
+        printf("room %d rows: %d, cols: %d, start row: %d, row columns: %d\n", (i+1), rooms[i][0], rooms[i][1], rooms[i][2], rooms[i][3]);
     }
 }
 
