@@ -4,10 +4,10 @@
 
 #define dungeon_rows 21
 #define dungeon_columns 80
-#define num_rooms 5
+#define num_rooms 6
 
 char dungeon[dungeon_rows][dungeon_columns];
-int rooms[5][4];
+int rooms[num_rooms][4];
 
 int check_rooms(int rows, int columns, int start_row, int start_column);
 void sort_rooms(void);
@@ -30,11 +30,11 @@ void sort_rooms(void)
 {
     int i, j;
 
-    for(i = 0; i < 4; i++)
+    for(i = 0; i < num_rooms - 1; i++)
     {
         int min_indx = i;
 
-        for(j = i+1; j < 5; j++)
+        for(j = i+1; j < num_rooms; j++)
         {
             int room1_start_y = rooms[min_indx][3];
             int room2_start_y = rooms[j][3];
@@ -67,7 +67,7 @@ void add_corridors(void)
 {
     int i, j, room;
 
-    for(room = 0; room < 4; room++)
+    for(room = 0; room < num_rooms-1; room++)
     {
         int room1_rows = rooms[room][0];
         int room1_columns = rooms[room][1];
@@ -93,14 +93,22 @@ void add_corridors(void)
         {
             for(i =  room1_mid_x; i > room2_mid_x - 1; i --)
             {
-                dungeon[i][room1_start_column + room1_columns] = '#';
+	      if(dungeon[i][room1_start_column + room1_columns] != '.')
+		{
+		  dungeon[i][room1_start_column + room1_columns] = '#';
+		}
+                
             }
         }
         else
         {
             for(i = room1_mid_x; i < room2_mid_x + 1; i++)
             {
-                dungeon[i][room1_start_column + room1_columns] = '#';
+	      if(dungeon[i][room1_start_column + room1_columns] != '.')
+		{
+		   dungeon[i][room1_start_column + room1_columns] = '#';
+		}
+               
             }
         }
 
@@ -108,14 +116,22 @@ void add_corridors(void)
         {
             for(j = (room1_start_column + room1_columns); j > (room2_start_column) ; j--)
             {
-                dungeon[room2_mid_x][j] = '#';
+	      if(dungeon[room2_mid_x][j] != '.')
+		{
+		   dungeon[room2_mid_x][j] = '#';
+		}
+               
             }
         }
         else
         {
             for(j = (room1_start_column + room1_columns); j < room2_start_column; j++)
             {
-                dungeon[room2_mid_x][j] = '#';
+	      if(dungeon[room2_mid_x][j]  != '.')
+		{
+		  dungeon[room2_mid_x][j] = '#';
+		}
+                
             }
         }
 
@@ -134,7 +150,7 @@ void add_rooms(void)
 
     srand(time(NULL));
 
-    while(room_counter < 5)
+    while(room_counter < num_rooms)
     {
         int success = 1;
 
@@ -177,11 +193,7 @@ void add_rooms(void)
     }
 
     sort_rooms();
-
-    for(i = 0; i < 5; i++)
-    {
-        printf("room %d rows: %d, cols: %d, start row: %d, row columns: %d\n", (i+1), rooms[i][0], rooms[i][1], rooms[i][2], rooms[i][3]);
-    }
+    
 }
 
 int check_rooms(int rows, int columns, int start_row, int start_column)
