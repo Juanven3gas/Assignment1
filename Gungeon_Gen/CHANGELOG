@@ -1,0 +1,99 @@
+commit 90a90e8c1193108c0eeaaaeaf1fce7db93fa4dae
+Author: Juan Venegas <juanven3gas@gmail.com>
+Date:   Tue Sep 5 18:58:39 2017 -0500
+
+    Adding makefile & fixed bugs in the dungeon generator
+
+commit 7c92c8d246338966bad88852a4084eb779870c87
+Author: Juanven3gas <juanven3gas@gmail.com>
+Date:   Tue Sep 5 14:12:01 2017 -0500
+
+    Fixing cooridor bug
+    
+    Room & corridors are generated. There is a condition where the corridors are not generated correctly. Still need to test on linux machine
+
+commit e5593de03698e53f7ad96b8b9a6a30008ad35326
+Author: Juanven3gas <juanven3gas@gmail.com>
+Date:   Mon Sep 4 16:06:40 2017 -0500
+
+    Fixed Spacing Bug
+    
+    Fixed bug that did not place rooms at least 3 spaces apart
+
+:...skipping...
+commit 90a90e8c1193108c0eeaaaeaf1fce7db93fa4dae
+Author: Juan Venegas <juanven3gas@gmail.com>
+Date:   Tue Sep 5 18:58:39 2017 -0500
+
+    Adding makefile & fixed bugs in the dungeon generator
+
+commit 7c92c8d246338966bad88852a4084eb779870c87
+Author: Juanven3gas <juanven3gas@gmail.com>
+Date:   Tue Sep 5 14:12:01 2017 -0500
+
+    Fixing cooridor bug
+    
+    Room & corridors are generated. There is a condition where the corridors are not generated correctly. Still need to test on linux machine
+
+commit e5593de03698e53f7ad96b8b9a6a30008ad35326
+Author: Juanven3gas <juanven3gas@gmail.com>
+Date:   Mon Sep 4 16:06:40 2017 -0500
+
+    Fixed Spacing Bug
+    
+    Fixed bug that did not place rooms at least 3 spaces apart
+
+commit 01b3a284596146bdd8f18eff38375fecd40519fa
+Author: Juanven3gas <juanven3gas@gmail.com>
+Date:   Mon Sep 4 15:23:59 2017 -0500
+
+    Fixing adding room bug
+    
+    trying to fix bug where rooms are being added too close to each other
+
+commit 7e0f144af367dfae5f34b144b86f9fb1c3d3996f
+Author: Juanven3gas <juanven3gas@gmail.com>
+Date:   Mon Sep 4 13:24:44 2017 -0500
+
+    IMplementing check room
+    
+    Checking to see if there is sufficient space between rooms
+
+
+commit eb3d59db76366f95a8da0b296450c63b1bcf6316
+Author: Juanven3gas <juanven3gas@gmail.com>
+Date:   Sun Sep 3 18:52:28 2017 -0500
+
+    Implementing add room
+    
+    celaning up code & trying to implement the add room function
+
+commit bbde53d61985b6ecdd13391c0d500e9c1630b4c5
+Author: Juanven3gas <juanven3gas@gmail.com>
+Date:   Sun Sep 3 18:40:00 2017 -0500
+
+    Implemeting adding rooms
+    
+    trying to implemet adding rooms with caution to the edges of the dungeon
+
+commit 32e16ee24ee6f61ddaea4934793d5c5b9581be21
+Author: Juanven3gas <juanven3gas@gmail.com>
+Date:   Sun Sep 3 16:47:46 2017 -0500
+
+    Adding rooms
+    
+    Skeleton code for adding rooms
+
+commit 4aa5144165cf5762e386f76362195a4b6e5d68a9
+Author: Juanven3gas <juanven3gas@gmail.com>
+Date:   Sun Sep 3 11:08:45 2017 -0500
+
+    Starting Point
+    
+    Code that inits & prints a dungeon
+
+commit 62d5c11a7deffad445b8010e02882a5771124d5f
+Author: Juanven3gas <juanven3gas@gmail.com>
+Date:   Sun Sep 3 10:49:40 2017 -0500
+
+    Initial commit
